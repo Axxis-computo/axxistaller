@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% block title %} Axxis Taller. {% endblock %}
+
+{% block content-title %} Axxis Taller - Problemas conocidos {% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <table class="table table-responsive table-bordered table-hover">
+                 <thead>
+                   <tr> 
+                     <th class="text-center" colspan="5">Problemas conocidos</th>
+                     <th> <a href="{% url "problema_new" %}" class="btn btn-primary btn-sm">Nuevo</a> </th>
+                   </tr>
+                   <tr> <th>Nombre</th> <th>Descripcion</th>  <th>Dispositivo</th> <th>Marca y Modelo</th> <th colspan="2">Acciones</th> </tr>
+                   </thead>
+                   <tbody>
+             {% for problema in problemaslist %}
+                      <tr> <td>{{problema.nombrecorto}}</td> <td>{{problema.descripcion}}</td>
+                       <td>{{problema.dispositivo}}</td> <td>{{problema.marca}}, {{problema.modelo}}</td>
+                       <td> <a href="{% url "problema_edit" problema.id %}" class="btn btn-primary btn-sm">Editar</a> </td>
+                       <td> <a href="{% url "problema_delete" problema.id %}" class="btn btn-primary btn-sm">Borrar</a> </td>
+                     </tr>
+            {% endfor %}
+                   </tbody>
+                   <tfoot>
+                     <tr>
+                       <th class="text-center" colspan="6">
+                         <ul class="pagination pagination-sm">
+                           <li><a href="#">&laquo;</a></li>
+                           <li><a href="#">1</a></li>
+                           <li><a href="#">2</a></li>
+                           <li><a href="#">3</a></li>
+                           <li><a href="#">&raquo;</a></li>
+                         </ul>
+                       </th>
+                     </tr>
+                   </tfoot>
+        </table>
+    {% else %}
+        <p class="alert alert-danger">Debes iniciar sesion para acceder a esta area</p>
+    {% endif %}
+{% endblock %}
