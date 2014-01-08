@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> {% block title %}AxxisTaller{% endblock %} </title>
+        <meta name="description" content="axxistaller">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="/static/css/axxistaller.css" rel="stylesheet" media="screen">
+        <script src="/static/js/jquery_2.0.3.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        <script src="/static/js/axxistaller.js"></script>
+    </head>
+
+  <body>
+
+    <div class="page-header">
+        <h1 class="text-center"> Axxis taller </h1>
+    </div>
+
+        <div id="sectLogin">
+          {% if user.is_authenticated %}
+            <form method="post" action="/logout/" class="well form-inline text-right">
+                {% csrf_token %}
+                <label for="lg_uname" >Bienvenido: {{user}}</label>
+                <button type="submit" class="btn btn-primary btn-sm">Salir</button>
+                <input type="hidden" name="next" value="/">
+            </form>
+          {% else %}
+            <form method="post" action="/login/" class="well form-inline text-right">
+                {% csrf_token %}
+                <label for="lg_uname" >Usuario</label>
+                <input type="text" class="input-small" id="lg_uname" placeholder="Nombre de usuario" name="username">
+                <label for="lg_pwd" class="control-label">Password</label>
+                <input type="password" class="input-small" id="lg_pwd" placeholder="Password" name="password">
+                <button type="submit" class="btn btn-primary btn-sm">Entrar</button>
+                <input type="hidden" name="next" value="/">
+            </form>
+          {% endif %}
+        </div>
+
+    <div class="row">
+      <div class="col-md-1">
+        {% if user.is_authenticated %}
+          <div class="btn-group-vertical">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/imgs/trabajos.png" alt="Trabajos" title="Trabajos">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu axxt_submenu">
+                  <li><a href="#">Recibidos</a></li>
+                  <li><a href="#">Asignados</a></li>
+                  <li><a href="">En revision</a></li>
+                  <li><a href="">En reparacion</a></li>
+                  <li><a href="">En espera</a></li>
+                  <li><a href="">Listo para entregar</a></li>
+                  <li><a href="">Entregados</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/imgs/clientes.png" alt="Clientes" title="Clientes">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu axxt_submenu">
+                  <li><a href="#">Listado de clientes</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/imgs/personal.png" alt="Personal" title="Personal">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu axxt_submenu">
+                  <li><a href="#">Listado de personal</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/imgs/ventas.png" alt="Ventas" title="Ventas">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu axxt_submenu">
+                  <li><a href="#">Registrar venta</a></li>
+                  <li><a href="#">Listado de ventas</a></li>
+                  <li><a href="#">Reporte de ventas</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/imgs/finanzas.png" alt="Finanzas" title="Finanzas">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu axxt_submenu">
+                  <li><a href="#">Registrar ingreso</a></li>
+                  <li><a href="#">Registrar gasto</a></li>
+                  <li><a href="#">Corte de caja</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/imgs/errores.png" alt="Problemas" title="Problemas">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu axxt_submenu">
+                  <li><a href="/problemas">Catalogo de problemas conocidos</a></li>
+                  <li><a href="/problemas/new">Registrar nuevo problema conocido</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/imgs/herramientas.png" alt="Herramientas" title="Herramientas">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu axxt_submenu">
+                  <li><a href="#">Catalogo de herramientas</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/imgs/materiales.png" alt="Materiales" title="Materiales">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu axxt_submenu">
+                  <li><a href="#">Catalogo de materiales</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/imgs/manuales.png" alt="Manuales" title="Manuales">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu axxt_submenu">
+                  <li><a href="{% url "manual_list" %}">Catalogo de manuales</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/imgs/software.png" alt="Software" title="Software">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu axxt_submenu">
+                  <li><a href="#">Catalogo de software</a></li>
+                  <li><a href="#">Catalogo de controladores</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="/static/imgs/perfil.png" alt="Mi perfil" title="Perfil">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu axxt_submenu">
+                  <li><a href="#">Mi perfil</a></li>
+                </ul>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="col-md-9">
+
+        <div class="panel panel-primary" id="contenido">
+          <div class="panel-heading text-center">
+            {% block content-title %} {% endblock %}
+          </div>
+          <div class="panel-body">
+              {% block content %} {% endblock %}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer text-center">
+        <h5> AxxisTaller &copy; 2013-2014 Axxis Develop Team </5>
+    </div>
+
+  </body>
+</html>
+
