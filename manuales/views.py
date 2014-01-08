@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django_tables2   import RequestConfig
 from django.forms import ModelForm
 from manuales.models import Manual
 
