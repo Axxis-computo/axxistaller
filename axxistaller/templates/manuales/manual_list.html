@@ -1,0 +1,88 @@
+{% extends 'index.html' %}
+{% block title %} Axxis Taller. {% endblock %}
+
+{% block content-title %} Axxis Taller - Manuales {% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <table class="table table-responsive table-bordered table-hover">
+                 <thead>
+                    <tr> 
+                      <th class="text-center" colspan="6">Manuales</th>
+                      <th> <a href="{% url "manual_new" %}" class="btn btn-primary btn-sm">Nuevo</a> </th>
+                    </tr>
+                    <tr>
+                      <th>Titulo</th> 
+                      <th>Idioma</th>  
+                      <th>Ubicacion</th> 
+                      <th>Categoria</th> 
+                      <th>Formato</th> 
+                      <th>Tags</th> 
+                      <th colspan="2">Acciones</th> 
+                    </tr>
+                  </thead>
+                   <tbody>
+             {% for manual in manualeslist %}
+                      <tr> <td>{{manual.titulo}}</td>
+                      <td>{{manual.idioma}}</td>
+                      <td>{{manual.ubucacion}}</td>
+                      <td>{{manual.CategoriaMan}}</td> 
+                      <td>{{manual.Formato}}</td>
+                      <td> {{manual.tags}}</td>
+                      <td> 
+                          <a class="btn btn-xs btn-primary" href="{% url "manual_edit" manual.id %}" title="Editar"/>
+                              <i class="glyphicon glyphicon-pencil"></i>
+                          </a>
+                            <button class="btn btn-primary btn-xs borrar-manual" id="{{manual.id}}" data-name="{{manual.titulo}}"><i class="glyphicon glyphicon-trash"></i></button>
+                        </td>
+                     </tr>
+            {% endfor %}
+                   </tbody>
+                   <tfoot>
+                     <tr>
+                       <th class="text-center" colspan="6">
+                         <ul class="pagination pagination-sm">
+                           <li><a href="?page=1">&laquo;</a></li>
+                           {% if manualeslist.has_previous %}
+                           <li><a href="?page={{ manualeslist.previous_page_number }}">{{ manualeslist.previous_page_number }}</a></li>
+                           {% endif %}
+                           <li class="active"><a href="">{{ manualeslist.number }}</a></li>
+                           {% if manualeslist.has_next %}
+                           <li><a href="?page={{ manualeslist.next_page_number }}">{{ manualeslist.next_page_number }}</a></li>
+                           {% endif %}
+                           <li><a href="?page={{ manualeslist.paginator.num_pages }}">&raquo;</a></li>
+                         </ul>
+                       </th>
+                     </tr>
+                   </tfoot>
+        </table>
+    {% else %}
+        <p class="alert alert-danger">Debes iniciar sesion para acceder a esta area</p>
+    {% endif %}
+
+   
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Borrar Manual</h4>
+      </div>
+      <div class="modal-body">
+          &iquest;En verdad deseas eliminar el registro <span id="modal_name"></span>? <br />
+           Esta accion no se podra deshacer.
+      </div>
+      <div class="modal-footer">
+        <form method="POST" action="{% url "manual_delete" %}">
+          {% csrf_token%}
+          <input type="hidden" id="modal_id" name="pk">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-danger">Borrar</button>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{% endblock %}

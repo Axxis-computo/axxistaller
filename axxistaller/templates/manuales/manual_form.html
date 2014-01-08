@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% block title %} Axxis Taller. {% endblock %}
+
+{% block content-title %} Axxis Taller - Registro de Manual{% endblock %}
+{% block content %}
+  {% if user.is_authenticated %}
+    <form method="post">{% csrf_token %}
+      <fieldset>
+      <legend> Registro de Manual </legend>
+        {{ form.as_p }}
+        <a href="{% url "manual_list" %}" class="btn btn-primary btn-sm">Cancelar</a>
+        <input type="submit" value="Guardar" class="btn btn-primary btn-sm"/>
+      </fieldset>
+    </form>
+  {% else %}
+    <p class="alert alert-danger">Debes iniciar sesion para acceder a esta area</p>
+  {% endif %}
+{% endblock %}
