@@ -1,13 +1,13 @@
 {% extends 'index.html' %}
 {% block title %} Axxis Taller. {% endblock %}
 
-{% block content-title %} Axxis Taller - Registro de problema conocido {% endblock %}
+{% block content-title %} Axxis Taller - Registro de Cliente {% endblock %}
 {% block content %}
     <form method="post">{% csrf_token %}
       <fieldset>
-      <legend> Registro de problema </legend>
+      <legend> Registro de cliente </legend>
         {{ form.as_p }}
-        <a href="{% url "problema_list" %}" class="btn btn-primary btn-sm">Cancelar</a>
+        <a href="{% url "cliente_list" %}" class="btn btn-primary btn-sm">Cancelar</a>
         <input type="submit" value="Guardar" class="btn btn-primary btn-sm"/>
       </fieldset>
     </form>

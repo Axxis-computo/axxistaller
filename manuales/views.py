@@ -13,7 +13,7 @@ class ManualForm(ModelForm):
 
 def manual_list(request, template_name='manuales/manual_list.html'):
     listmanuales = Manual.objects.all()
-    paginator = Paginator(listmanuales,2) #se pagina de 5 en 5
+    paginator = Paginator(listmanuales,1) #se pagina de 5 en 5
     page = request.GET.get('page')
     try:
         manuales = paginator.page(page)

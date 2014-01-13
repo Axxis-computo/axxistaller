@@ -1,29 +1,29 @@
 {% extends 'index.html' %}
 {% block title %} Axxis Taller. {% endblock %}
 
-{% block content-title %} Axxis Taller - Problemas conocidos {% endblock %}
+{% block content-title %} Axxis Taller - Clientes {% endblock %}
 {% block content %}
         <table class="table table-responsive table-bordered table-hover">
                  <thead>
-                   <tr> 
-                     <th class="text-center" colspan="4">Problemas conocidos</th>
+                   <tr>
+                     <th class="text-center" colspan="4">Clientes</th>
                      <th> 
-                        <a href="{% url "problema_new" %}" class="btn btn-primary btn-xs">
-                          <span class="glyphicon glyphicon-edit"> Nuevo</span>
-                        </a>
+                       <a href="{% url "cliente_new" %}" class="btn btn-primary btn-xs">
+                         <span class="glyphicon glyphicon-edit"> Nuevo</span>
+                       </a>
                      </th>
                    </tr>
-                   <tr> <th>Nombre</th> <th>Descripcion</th>  <th>Dispositivo</th> <th>Marca y Modelo</th> <th>Acciones</th> </tr>
+                   <tr> <th>Cliente</th> <th>RFC</th>  <th>Telefono</th> <th>Correo</th> <th colspan="2">Acciones</th> </tr>
                    </thead>
                    <tbody>
-             {% for problema in problemaslist %}
-                      <tr> <td>{{problema.nombrecorto}}</td> <td>{{problema.descripcion}}</td>
-                       <td>{{problema.dispositivo}}</td> <td>{{problema.marca}}, {{problema.modelo}}</td>
+             {% for cliente in clienteslist %}
+                      <tr> <td>{{cliente}}</td> <td>{{cliente.rfc}}</td>
+                       <td>{{cliente.telefono}}</td> <td>{{cliente.correo}}</td>
                        <td> 
-                         <a href="{% url "problema_edit" problema.id %}" class="btn btn-primary btn-xs">
+                         <a href="{% url "cliente_edit" cliente.id %}" class="btn btn-primary btn-xs">
                            <span class="glyphicon glyphicon-pencil"></span>
                          </a>
-                         <button class="btn btn-primary btn-xs borrar-ent" id="{{problema.id}}" data-name="{{problema.nombrecorto}}">
+                         <button class="btn btn-primary btn-xs borrar-ent" id="{{cliente.id}}" data-name="{{cliente}}">
                            <span class="glyphicon glyphicon-trash"></span>
                          </button>
                        </td>
@@ -35,34 +35,34 @@
                        <th class="text-center" colspan="5">
                          <ul class="pagination pagination-sm">
                            <li><a href="?page=1">&laquo;</a></li>
-                           {% if problemaslist.has_previous %}
-                           <li><a href="?page={{ problemaslist.previous_page_number }}">{{ problemaslist.previous_page_number }}</a></li>
+                           {% if clienteslist.has_previous %}
+                           <li><a href="?page={{ clienteslist.previous_page_number }}">{{ clienteslist.previous_page_number }}</a></li>
                            {% endif %}
-                           <li class="active"><a href="">{{ problemaslist.number }}</a></li>
-                           {% if problemaslist.has_next %}
-                           <li><a href="?page={{ problemaslist.next_page_number }}">{{ problemaslist.next_page_number }}</a></li>
+                           <li class="active"><a href="">{{ clienteslist.number }}</a></li>
+                           {% if clienteslist.has_next %}
+                           <li><a href="?page={{ clienteslist.next_page_number }}">{{ clienteslist.next_page_number }}</a></li>
                            {% endif %}
-                           <li><a href="?page={{ problemaslist.paginator.num_pages }}">&raquo;</a></li>
+                           <li><a href="?page={{ clienteslist.paginator.num_pages }}">&raquo;</a></li>
                          </ul>
                        </th>
                      </tr>
                    </tfoot>
         </table>
-        
+
 <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Borrar Registro de problema</h4>
+        <h4 class="modal-title" id="myModalLabel">Borrar Registro de Cliente</h4>
       </div>
       <div class="modal-body">
           &iquest;En verdad deseas eliminar el registro <em><span id="modal_name"></span></em>? <br />
            Esta accion no se podra deshacer.
       </div>
       <div class="modal-footer">
-        <form method="POST" action="{% url 'problema_delete' %}">
+        <form method="POST" action="{% url 'cliente_delete' %}">
           {% csrf_token%}
           <input type="hidden" id="modal_id" name="pk">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -72,5 +72,4 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 {% endblock %}

@@ -21,4 +21,5 @@ urlpatterns = patterns('',
     url(r'^logout/$', logout),
     url(r'^problemas/', include('problemas.urls')),
     url(r'^manuales/', include('manuales.urls')),
+    url(r'^clientes/', include('clientes.urls')),
 )

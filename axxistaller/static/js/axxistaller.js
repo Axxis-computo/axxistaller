@@ -9,3 +9,14 @@
             return false;
         });
     });
+    
+    $(document).ready(function(){
+        $('.borrar-ent').click(function(){
+            var ent_id = $(this).attr('id');
+            var ent_titulo = $(this).data('name');
+            $('#modal_name').text(ent_titulo);
+            $('#modal_id').val(ent_id);
+            $('#myModal').modal('show');
+            return false;
+        });
+    });
