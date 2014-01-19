@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% block title %} Axxis Taller. {% endblock %}
+
+{% block content-title %} Axxis Taller - Personal {% endblock %}
+{% block content %}
+        <table class="table table-responsive table-bordered table-hover">
+                 <thead>
+                   <tr>
+                     <th class="text-center" colspan="4">Personal</th>
+                   </tr>
+                   <tr> <th>Nombre</th> <th>RFC</th> <th>Telefono</th> <th>Correo</th> </tr>
+                   </thead>
+                   <tbody>
+             {% for employee in staffslist %}
+                      <tr> <td>{{employee.user.first_name}} {{employee.user.last_name}}</td> <td>{{employee.rfc}}</td>
+                       <td>{{employee.telefono}}</td> <td>{{employee.user.email}}</td>
+                     </tr>
+            {% endfor %}
+                   </tbody>
+                   <tfoot>
+                     <tr>
+                       <th class="text-center" colspan="5">
+                         <ul class="pagination pagination-sm">
+                           <li><a href="?page=1">&laquo;</a></li>
+                           {% if staffslist.has_previous %}
+                           <li><a href="?page={{ staffslist.previous_page_number }}">{{ staffslist.previous_page_number }}</a></li>
+                           {% endif %}
+                           <li class="active"><a href="">{{ staffslist.number }}</a></li>
+                           {% if staffslist.has_next %}
+                           <li><a href="?page={{ staffslist.next_page_number }}">{{ staffslist.next_page_number }}</a></li>
+                           {% endif %}
+                           <li><a href="?page={{ staffslist.paginator.num_pages }}">&raquo;</a></li>
+                         </ul>
+                       </th>
+                     </tr>
+                   </tfoot>
+        </table>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+{% block title %} Axxis Taller. {% endblock %}
+
+{% block content-title %} Axxis Taller - Perfil de miembro {% endblock %}
+{% block content %}
+    <form method="post">{% csrf_token %}
+      <fieldset>
+           <legend> Mi perfil </legend>
+           {{form.as_p}}
+        <input type="submit" value="Actualizar" class="btn btn-primary btn-sm">
+      </fieldset>
+
+    </form>
+{% endblock %}
